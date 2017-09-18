@@ -102,3 +102,8 @@ ENV/
 
 # pyCharm
 .idea
+
+#database
+*.sqlite3
+
+settings.py
