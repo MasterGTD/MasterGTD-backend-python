@@ -40,7 +40,7 @@ class Project(models.Model):
     slug = models.CharField(max_length=200, unique=False)
     desc = models.TextField()
     is_public = models.BooleanField()
-    category = models.ForeignKey(Category, models.SET_NULL,
+    category = models.ForeignKey(Category, models.SET_NULL, null=True,
                                  related_name="projects",
                                  related_query_name="category")
     user = models.ForeignKey(User, related_name="projects", related_query_name="user")
