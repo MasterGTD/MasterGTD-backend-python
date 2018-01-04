@@ -11,14 +11,15 @@ from pypinyin import lazy_pinyin as lp
 class Tag(models.Model):
     '''标签组织'''
     text = models.CharField(max_length=200, unique=True)
-    slug = models.CharField(max_length=200, unique=True)
+    slug = models.CharField(max_length=200, unique=True, null=True)
 
     def __str__(self):
         return self.text
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        self.slug = '-'.join(lp(str(self.text))) + str(self.pk)
+        super(Tag, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
+        self.slug = '-'.join(lp(str(self.text))) + str(self.pk) # 之后对pk加个加密啥的
         super(Tag, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
 
 
@@ -26,14 +27,14 @@ class Category(models.Model):
     """任务所归的目录（工作，学习之类的）"""
     name = models.CharField(max_length=200, unique=True)
     slug = models.CharField(max_length=200, unique=True)
-    pro_count = models.IntegerField()
+    pro_count = models.IntegerField(default=0, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        self.slug = '-'.join(str(self.name))
+        self.slug = '-'.join(lp(str(self.name)))
         super(Category, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
 
 
@@ -50,6 +51,7 @@ class Todo(models.Model):
     user = models.ForeignKey(User, related_name="Todos", related_query_name="user", on_delete=models.CASCADE)
     start_day = models.DateField(auto_now_add=True) # 开始时间
     finish_day = models.DateField(null=True) # 结束时间
+    tags = models.ManyToManyField(Tag, related_name="todos")
 
     def __str__(self):
         return self.name
