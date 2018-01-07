@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
+from .models import *
 # Create your views here.
 
 
@@ -82,4 +83,45 @@ def user_logout(request):
         'result': 'success',
         'data': 'username',
         'value': 'logout success'
+    })
+
+
+@csrf_exempt
+def get_tag(request):
+    if request.method == "POST" :
+        tag_name = request.POST.get("name")
+        tag = Tag.objects.get_or_create(text=tag_name)[0]
+        return JsonResponse({
+            'result': 'success',
+            'data': {
+                'name': tag_name,
+                'slug': tag.slug
+            },
+            'value': 'Create tag success.'
+        })
+    return JsonResponse({
+            'result': 'fail',
+            'data': '',
+            'value': 'method error'
+        })
+
+
+@csrf_exempt
+def get_category(request):
+    if request.method == "POST":
+        cate_name = request.POST.get("name")
+        cate = Category.objects.get_or_create(name=cate_name)[0]
+        return JsonResponse({
+            'result': 'success',
+            'data': {
+                'name': cate.name,
+                'slug': cate.slug,
+                'proCount': cate.pro_count
+            },
+            'value': 'Create category success.'
+        })
+    return JsonResponse({
+        'result': 'fail',
+        'data': '',
+        'value': 'method error'
     })
