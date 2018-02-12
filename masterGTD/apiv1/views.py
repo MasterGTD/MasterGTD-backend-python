@@ -5,13 +5,103 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import viewsets
+
 from .models import *
+from .serializers import *
 # Create your views here.
 
 
 def index(request):
     return HttpResponse("Welcome to MasterGTD")
 
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Group.objects.all().order_by('-date_joined')
+    serializer_class = GroupSerializer
+
+
+class TagViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Tag.objects.all().order_by('-id')
+    serializer_class = TagSerializer
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Category.objects.all().order_by('-id')
+    serializer_class = CategorySerializer
+
+
+class TodoViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Todo.objects.all().order_by('-id')
+    serializer_class = TodoSerializer
+
+
+class HabitViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Habit.objects.all().order_by('-id')
+    serializer_class = HabitSerializer
+
+
+class HabitDayViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = HabitDay.objects.all().order_by('-id')
+    serializer_class = HabitDaySerializer
+
+
+class PercentTodoViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = PercentTodo.objects.all().order_by('-id')
+    serializer_class = PercentTodoSerializer
+
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Project.objects.all().order_by('-id')
+    serializer_class = ProjectSerializer
+
+
+class CheckListViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = CheckList.objects.all().order_by('-id')
+    serializer_class = CheckListSerializer
+
+
+class TaskViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Task.objects.all().order_by('-id')
+    serializer_class = TaskSerializer
 
 @csrf_exempt
 def user_login(request):
@@ -83,45 +173,4 @@ def user_logout(request):
         'result': 'success',
         'data': 'username',
         'value': 'logout success'
-    })
-
-
-@csrf_exempt
-def get_tag(request):
-    if request.method == "POST" :
-        tag_name = request.POST.get("name")
-        tag = Tag.objects.get_or_create(text=tag_name)[0]
-        return JsonResponse({
-            'result': 'success',
-            'data': {
-                'name': tag_name,
-                'slug': tag.slug
-            },
-            'value': 'Create tag success.'
-        })
-    return JsonResponse({
-            'result': 'fail',
-            'data': '',
-            'value': 'method error'
-        })
-
-
-@csrf_exempt
-def get_category(request):
-    if request.method == "POST":
-        cate_name = request.POST.get("name")
-        cate = Category.objects.get_or_create(name=cate_name)[0]
-        return JsonResponse({
-            'result': 'success',
-            'data': {
-                'name': cate.name,
-                'slug': cate.slug,
-                'proCount': cate.pro_count
-            },
-            'value': 'Create category success.'
-        })
-    return JsonResponse({
-        'result': 'fail',
-        'data': '',
-        'value': 'method error'
     })

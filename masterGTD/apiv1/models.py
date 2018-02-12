@@ -66,17 +66,17 @@ class Habit(Todo):
     done_today = models.BooleanField(default=False) # 今天是否完成
     finished_days = models.IntegerField() # 累计完成天数
     current_strike_days = models.IntegerField() # 当前连续天数
-    longet_strike_days = models.IntegerField() # 最长连续天数
+    longest_strike_days = models.IntegerField() # 最长连续天数
 
 
 class HabitDay(models.Model):
     """记录习惯型任务的每天完成情况"""
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(auto_now_add=True, blank=True)
     done = models.BooleanField(default=False)
     done_time = models.DateTimeField(auto_now_add=True)
     habit = models.ForeignKey(Habit, null=False, on_delete=models.CASCADE)
     def __str__(self):
-        return (str)(self.date)
+        return self.date
         
 
 class PercentTodo(Todo):
