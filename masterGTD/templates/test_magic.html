@@ -4,6 +4,33 @@
 	<title>Test Magic Window</title>
 </head>
 <body>
-	<a href="https://af3bpe.mlinks.cc/AeMn">mLink</a>
+	<a id="btnOpenApp" href="#">mLink</a>
 </body>
+<script src="https://static.mlinks.cc/scripts/dist/mlink.min.js"></script>
+<script>
+	new Mlink({
+	    mlink:'https://af3bpe.mlinks.cc/AeMn',//短链地址
+	    button:document.querySelector('a#btnOpenApp')
+	});
+/* ------ 或 -------- */
+// var link='https://a.mlinks.cc/ABCD';//短链地址
+// var btn_1=document.querySelector('a#btnOpenApp1');
+// var btn_2=document.querySelector('a#btnOpenApp2');
+// var btn_3=document.querySelector('a#btnOpenApp3');
+
+// var options = [
+//     {
+//         mlink: link+'?name=1',
+//         button: btn_1
+//     }, {
+//         mlink:link+'?name=2',
+//         button: btn_2
+//     }, {
+//         mlink: link+'?name=3',
+//         button: btn_3
+//     }
+// ];
+
+// new Mlink(options);
+</script>
 </html>
