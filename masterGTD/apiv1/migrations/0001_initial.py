@@ -31,12 +31,24 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+<<<<<<< HEAD
+            name='Project',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=200)),
+                ('slug', models.CharField(max_length=200)),
+                ('desc', models.TextField()),
+                ('is_public', models.BooleanField()),
+                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='projects', related_query_name='category', to='apiv1.Category')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='projects', related_query_name='user', to=settings.AUTH_USER_MODEL)),
+=======
             name='HabitDay',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date', models.DateField(auto_now_add=True)),
                 ('done', models.BooleanField(default=False)),
                 ('done_time', models.DateTimeField(auto_now_add=True)),
+>>>>>>> e7ecc14c77e3893a0d5e9091762651f6dbf65a93
             ],
         ),
         migrations.CreateModel(
@@ -52,6 +64,16 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=300)),
+<<<<<<< HEAD
+                ('is_finished', models.BooleanField()),
+                ('of_list', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tasks', related_query_name='list', to='apiv1.CheckList')),
+            ],
+        ),
+        migrations.AddField(
+            model_name='checklist',
+            name='of_project',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lists', related_query_name='project', to='apiv1.Project'),
+=======
                 ('is_finished', models.BooleanField(default=False)),
                 ('of_list', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='tasks', related_query_name='list', to='apiv1.CheckList')),
             ],
@@ -115,5 +137,6 @@ class Migration(migrations.Migration):
             model_name='checklist',
             name='of_Project',
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='lists', related_query_name='Todo', to='apiv1.Project'),
+>>>>>>> e7ecc14c77e3893a0d5e9091762651f6dbf65a93
         ),
     ]

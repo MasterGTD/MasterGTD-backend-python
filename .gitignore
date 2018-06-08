@@ -107,3 +107,4 @@ ENV/
 *.sqlite3
 
 settings.py
+migrations/
