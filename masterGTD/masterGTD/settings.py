@@ -25,7 +25,7 @@ SECRET_KEY = 'qizeb9v^7tswy3*w*@ugo1tr4w1(9%ltpmw=ti8ck@zq)_kyhu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['api.zhufree.info']
 
 
 # Application definition
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'masterGTD.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates']
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,3 +120,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = "/var/www/zhufree.info/static/"
