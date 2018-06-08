@@ -43,7 +43,7 @@ class Todo(models.Model):
     name = models.CharField(max_length=200, unique=False)
     slug = models.CharField(max_length=200, unique=True)
     desc = models.TextField()
-    is_public = models.BooleanField() # 是否公开
+    is_public = models.BooleanField(default=True, null=False, blank=True) # 是否公开
     category = models.ForeignKey(Category, null=True,
                                  related_name="Todos",
                                  related_query_name="category",
@@ -66,7 +66,7 @@ class Habit(Todo):
     done_today = models.BooleanField(default=False) # 今天是否完成
     finished_days = models.IntegerField() # 累计完成天数
     current_strike_days = models.IntegerField() # 当前连续天数
-    longet_strike_days = models.IntegerField() # 最长连续天数
+    longest_strike_days = models.IntegerField() # 最长连续天数
 
 
 class HabitDay(models.Model):
@@ -74,7 +74,7 @@ class HabitDay(models.Model):
     date = models.DateField(auto_now_add=True)
     done = models.BooleanField(default=False)
     done_time = models.DateTimeField(auto_now_add=True)
-    habit = models.ForeignKey(Habit, null=False, on_delete=models.CASCADE)
+    habit = models.ForeignKey(Habit, related_name="days", related_query_name="habit", null=False, on_delete=models.CASCADE)
     def __str__(self):
         return (str)(self.date)
         
@@ -100,7 +100,6 @@ class CheckList(models.Model):
 
 
 class Task(models.Model):
-    name = models.CharField(max_length=300, unique=False)
     is_finished = models.BooleanField(default=False)
     of_list = models.ForeignKey(CheckList, null=True, related_name="tasks", related_query_name='list', on_delete=models.SET_NULL)
 

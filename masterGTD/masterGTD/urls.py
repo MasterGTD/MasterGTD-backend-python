@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.conf.urls import include
 from django.contrib import admin
+from apiv1.views import test_magic
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^v1/', include('apiv1.urls')),
+    url(r'^testmagic/$', test_magic),
 ]

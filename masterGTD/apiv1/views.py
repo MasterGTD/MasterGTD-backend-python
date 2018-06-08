@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
@@ -125,3 +125,7 @@ def get_category(request):
         'data': '',
         'value': 'method error'
     })
+
+
+def test_magic(request):
+    return render(request, 'test_magic.html')

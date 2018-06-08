@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^userlogout/$', user_logout),
     url(r'^gettag/$', get_tag),
     url(r'^getcategory/$', get_category),
+    url(r'^testmagic/$', test_magic),
 ]
