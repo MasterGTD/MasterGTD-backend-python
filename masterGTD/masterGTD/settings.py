@@ -124,3 +124,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static").replace('\\', '/'),
     '/var/www/static/',
 )
+STATIC_ROOT = "/var/www/zhufree.info/static/"
