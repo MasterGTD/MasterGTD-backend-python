@@ -108,3 +108,5 @@ ENV/
 
 settings.py
 migrations/
+migrations
+/masterGTD/apiv1/migrations

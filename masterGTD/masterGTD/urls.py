@@ -17,9 +17,11 @@ from django.conf.urls import url
 from django.conf.urls import include
 from django.contrib import admin
 from apiv1.views import test_magic
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^v1/', include('apiv1.urls')),
     url(r'^testmagic/$', test_magic),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
